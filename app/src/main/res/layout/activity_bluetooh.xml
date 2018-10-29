@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android" >
+
+
+
+
+    <ImageView
+        android:id="@+id/imagenBluetooh"
+        android:layout_width="180dp"
+        android:layout_height="70dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="80dp"
+        app:srcCompat="@drawable/ic_action_off" />
+
+<!--   Boton de encender-->
+    <Button
+        android:id="@+id/EncenderBluetooh"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="60dp"
+        android:text="Encender"/>
+    <!--   Boton de apagar-->
+    <Button
+        android:id="@+id/ApagarBluetooh"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-49dp"
+        android:layout_marginLeft="180dp"
+        android:text="Apagar"/>
+
+    <!--   Boton de visibilidad de bluetooh-->
+
+    <Button
+        android:id="@+id/VisibilidadBluetooh"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-4dp"
+        android:layout_marginLeft="60dp"
+        android:text="visibilidad"/>
+
+    <!--   Boton para mostrar los dispositivos vincualdos de bluetooh-->
+
+    <Button
+        android:id="@+id/VinculadosBluetooh"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-48dp"
+        android:layout_marginLeft="180dp"
+        android:text="vinculados"/>
+
+    <!--   Boton para mostrar los dispositivos disponibles de bluetooh-->
+
+    <Button
+        android:id="@+id/DisponiblesBluetooh"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="-5dp"
+        android:layout_marginLeft="129dp"
+        android:text="Dispositivos"/>
+
+
+
+    <!--  Text view Dispositivos disponibles-->
+    <TextView
+        android:id="@+id/Lista"
+        android:layout_width="match_parent"
+        android:layout_height="90dp"
+        android:layout_marginTop="20dp"
+        android:textAlignment="center"
+        android:hint="Dispositivos Asociados" />
+
+
+    <ListView
+
+        android:id="@+id/listaDispositivos"
+        android:layout_width="match_parent"
+
+        android:layout_height="match_parent" />
+
+
+</LinearLayout>

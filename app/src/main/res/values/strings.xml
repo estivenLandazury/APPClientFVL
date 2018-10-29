@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">ClienteFVL</string>
+
+    <string-array name="atributos_persona">
+
+        <item>ListarTodo</item>
+        <item>Identificador</item>
+        <item>Nombre</item>
+        <item>Apellido</item>
+    </string-array>
+</resources>
