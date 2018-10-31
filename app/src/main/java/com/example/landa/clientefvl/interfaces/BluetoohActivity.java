@@ -42,7 +42,7 @@ public class BluetoohActivity extends AppCompatActivity  {
     private final static int REQUEST_DISCOVER_BT = 1;
     //Identificador del servicio////
     private static final UUID BTMODULEUUID = null;
-    private BluetoothSocket socket;
+
 
 
 
@@ -78,6 +78,7 @@ public class BluetoohActivity extends AppCompatActivity  {
         btndevices = findViewById(R.id.DisponiblesBluetooh);
         viewsDevices = findViewById(R.id.listaDispositivos);
 
+        mBluetoAdapter = BluetoothAdapter.getDefaultAdapter();
 
         devicesLista= new ArrayList<>();
         viewsDevices.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
@@ -90,16 +91,17 @@ public class BluetoohActivity extends AppCompatActivity  {
             public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
 
               BluetoothDevice elemento= devicesLista.get(position);
+
               ClienteClass clienteClass= new ClienteClass(elemento);
-                clienteClass.start();
+
+              clienteClass.start();
 
 
-               showToats("se estableció la conexión exitosamente con el dispositivo: "+elemento.getName());
+               showToats("conectado al dispositivo: "+elemento.getName());
                /*  showToats("El dispositivo selecionado es: "+ elemento.getName());*/
             }
         });
 
-        mBluetoAdapter = BluetoothAdapter.getDefaultAdapter();
 
 
 
@@ -233,6 +235,7 @@ public class BluetoohActivity extends AppCompatActivity  {
         public void onReceive(Context context, Intent intent) {
             // Filtramos por la accion. que  Nos interesa detectar
             String action = intent.getAction();
+
             switch (action){
                 case BluetoothAdapter.ACTION_DISCOVERY_STARTED:
                     showToats("Busqueda de dispositvos iniciada");
@@ -248,8 +251,6 @@ public class BluetoohActivity extends AppCompatActivity  {
                     BluetoothDevice device= intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
                     devicesLista.add(device);
 
-                    showToats("añadido: "+ device.getName());
-
                     showToats("Dispositivo encontrado: " + device.getName() + "; MAC " + device.getAddress());
                     Log.d("ACTION", "Dispositivo encontrado: " + device.getName() + "; MAC " + device.getAddress());
 
@@ -261,7 +262,9 @@ public class BluetoohActivity extends AppCompatActivity  {
 
                     if(mBluetoAdapter.isEnabled()) {
                         showToats("El bluetooh se ha activado ");
-                    }else if(!mBluetoAdapter.isEnabled()){
+                    }
+
+                    if(!mBluetoAdapter.isEnabled()){
                         showToats("El bluetooh se ha desactivado");
 
                     }
@@ -278,14 +281,18 @@ public class BluetoohActivity extends AppCompatActivity  {
     private class ClienteClass extends Thread
     {
        private BluetoothDevice device;
+       private BluetoothSocket socket;
 
        public ClienteClass (BluetoothDevice device1){
            device=device1;
 
+
            try {
 
-               ParcelUuid[] v= device.getUuids();
+
                socket = device.createRfcommSocketToServiceRecord(obtenerUUID()[0].getUuid());
+              /* socket = device.createInsecureRfcommSocketToServiceRecord(obtenerUUID()[0].getUuid());*/
+
            } catch (IOException e) {
                e.printStackTrace();
            }
@@ -295,23 +302,38 @@ public class BluetoohActivity extends AppCompatActivity  {
 
 
        public void run(){
+           mBluetoAdapter.cancelDiscovery();
+
            try {
                socket.connect();
-               showToats("se logró la conexión exitosamente");
-           } catch (Exception e) {
+               Message message=Message.obtain();
+
+           } catch (IOException conectException) {
+
                try{
                    socket.close();
 
+
                }catch (Exception i){
-                   showToats("no se logró cerra la conexión");
 
                }
 
-               e.printStackTrace();
-               showToats("no se pudo establecer la conexión");
+               return;
 
            }
        }
+
+
+       public void cancel(){
+           try {
+               socket.close();
+           }
+           catch (IOException e) {
+               showToats("Error fatal");
+
+           }
+
+           }
 
 
     }
@@ -344,11 +366,7 @@ public class BluetoohActivity extends AppCompatActivity  {
         return uuids;
     }
 
-    public void cancel() {
-        try {
-            socket.close();
-        } catch (IOException e) { }
-    }
+
 
 
     private void showToats(String mensaje) {
