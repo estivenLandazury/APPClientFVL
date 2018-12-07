@@ -32,7 +32,7 @@ public class RegistroCuentaActivity extends AppCompatActivity  implements View.O
 
     public final static String CONEXION= Constante.CONEXION;
     private Spinner tipodocumentos;
-    private Constante constantes= new Constante();
+
     String documentoSelecionado;
     EditText textNombre, textApellido, textNumerodocumento, textContraseña, textRepetContraseña, textCorreo;
     Button btnRegistrar;
