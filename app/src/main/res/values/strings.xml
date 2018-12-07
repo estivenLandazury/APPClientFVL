@@ -1,12 +1,18 @@
 <resources>
     <string name="app_name">ClienteFVL</string>
 
-    <string-array name="atributos_persona">
+    <string-array name="TipoDocumento">
 
-        <item>ListarTodo</item>
-        <item>Identificador</item>
-        <item>Nombre</item>
-        <item>Apellido</item>
+        <item>cedula</item>
+        <item>Tarjeta Identidad</item>
+
+    </string-array>
+
+    <string-array name="TipoUsuario">
+        <item>Ambulatorio</item>
+        <item>Hospitalario</item>
+        <item>Acompañante</item>
+
     </string-array>
     <string name="title_activity_login">Sign in</string>
 

@@ -5,19 +5,27 @@ import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Usuario {
 
-    String Identificador;
-    String nombre;
-    String apellido;
 
-    public String getIdentificador() {
-        return Identificador;
+
+
+
+    private String id;
+    private  String nombre;
+    private   String apellido;
+    private String numeroDocumento;
+
+    private String user;
+
+    public String getNumeroDocumento() {
+        return numeroDocumento;
     }
 
-    public void setIdentificador(String identificador) {
-        Identificador = identificador;
+    public void setNumeroDocumento(String numeroDocumento) {
+        this.numeroDocumento = numeroDocumento;
     }
 
     public String getNombre() {
@@ -36,6 +44,25 @@ public class Usuario {
         this.apellido = apellido;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+
+
+
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
 
     public static ArrayList<Usuario> getUsuarios(String jason) {
          Gson gson = new Gson();

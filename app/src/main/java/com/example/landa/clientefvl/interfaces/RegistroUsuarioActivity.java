@@ -55,9 +55,10 @@ public class RegistroUsuarioActivity extends AppCompatActivity  implements View.
                     try {
                         Gson gson = new Gson();
                         Usuario usuario = new Usuario();
-                        usuario.setIdentificador(IdentificadorText.getText().toString());
+                        usuario.setNumeroDocumento(IdentificadorText.getText().toString());
                         usuario.setNombre(nombreText.getText().toString());
                         usuario.setApellido(apellidoText.getText().toString());
+                        usuario.setUser("");
                         String jsonNombre = gson.toJson(usuario);
                         final String respuesta = WEBUtilDomi.JsonByPOSTrequest("http://192.168.0.21:8080/usuario", jsonNombre);
 

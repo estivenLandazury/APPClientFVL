@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".interfaces.Registro">
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="110dp"
+        android:id="@+id/nombreText"
+        android:hint="ingrese el nombre"
+        android:inputType="text"
+
+        />
+
+    <EditText
+    android:layout_width="200dp"
+    android:layout_height="45dp"
+    android:layout_gravity="center"
+    android:layout_marginTop="8dp"
+    android:id="@+id/apellidoText"
+    android:hint="ingrese su apellido"
+    android:inputType="text"
+
+    />
+
+
+    <Spinner
+        android:id="@+id/tipoDoc"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center">
+
+    </Spinner>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/numeroDocText"
+        android:hint="número Documento"
+        android:inputType="number"
+
+        />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/nombreDispositivo"
+        android:hint="nombre Dispositivo"
+        android:inputType="number"
+        />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/macDispositivo"
+        android:hint="macDispositivo"
+        android:inputType="number"
+        />
+
+
+
+    <Spinner
+        android:id="@+id/tipoUsu"
+        android:layout_width="200dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="8dp"
+        android:layout_gravity="center">
+
+    </Spinner>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/btnRegistrar"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"
+        android:text="Registrar"/>
+
+
+
+
+
+</LinearLayout>

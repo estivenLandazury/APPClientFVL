@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+
+    tools:context=".interfaces.RegistroCuentaActivity">
+
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="110dp"
+        android:id="@+id/nombreCuenta"
+        android:hint="Nombre"
+        android:inputType="text"
+
+        />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/apellidoCuenta"
+        android:hint="Apellido"
+        android:inputType="text"
+        />
+
+        <Spinner
+            android:id="@+id/cuentaTipoDoc"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center">
+        </Spinner>
+
+
+
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/CuentanumeroDoc"
+        android:hint="número Documento"
+        android:inputType="number"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/correoCuenta"
+        android:hint="correo"
+        android:inputType="textEmailAddress"
+        />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/claveCuenta"
+        android:hint="contraseña"
+        android:inputType="textPassword"
+        />
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/claveCuentaDos"
+        android:hint="Repita Contraseña"
+        android:inputType="textPassword"
+        />
+
+
+    <Button
+        android:layout_width="wrap_content"
+        android:id="@+id/btnRegistrarCuenta"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="2dp"
+        android:text="Registrar"/>
+
+
+
+</LinearLayout>

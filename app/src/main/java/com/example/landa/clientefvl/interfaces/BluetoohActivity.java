@@ -43,6 +43,9 @@ public class BluetoohActivity extends AppCompatActivity  {
     //Identificador del servicio////
     private static final UUID BTMODULEUUID = null;
     private BluetoothSocket socket;
+    private String nombreDispositivo;
+    private String MacDispositivo;
+
 
 
 
@@ -82,28 +85,6 @@ public class BluetoohActivity extends AppCompatActivity  {
 
         devicesLista= new ArrayList<>();
         viewsDevices.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-
-
-
-        //Selección de un elemento del lista de dispositivos
-
-//        viewsDevices.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-//            @Override
-//            public void onItemClick(AdapterView<?> parent, View view, final int position, long id) {
-//
-//              BluetoothDevice elemento= devicesLista.get(position);
-//              ClienteClass clienteClass= new ClienteClass(elemento);
-//                clienteClass.start();
-//
-//
-//               showToats("se estableció la conexión exitosamente con el dispositivo: "+elemento.getName());
-//               /*  showToats("El dispositivo selecionado es: "+ elemento.getName());*/
-//            }
-//        });
-//
-
-
-
         mBluetoAdapter = BluetoothAdapter.getDefaultAdapter();
 
 
@@ -231,10 +212,6 @@ public class BluetoohActivity extends AppCompatActivity  {
 
 
         IntentFilter filterBusqueda= new IntentFilter();
-//        filterBusqueda.addAction(BluetoothAdapter.ACTION_DISCOVERY_STARTED);
-//        filterBusqueda.addAction(BluetoothAdapter.ACTION_DISCOVERY_FINISHED);
-//        filterBusqueda.addAction(BluetoothAdapter.ACTION_STATE_CHANGED);
-//        filterBusqueda.addAction(BluetoothDevice.ACTION_FOUND);
         filterBusqueda.addAction(BluetoothDevice.ACTION_ACL_CONNECTED);
         filterBusqueda.addAction(BluetoothDevice.ACTION_ACL_DISCONNECT_REQUESTED);
         filterBusqueda.addAction(BluetoothDevice.ACTION_ACL_DISCONNECTED);
@@ -292,61 +269,6 @@ public class BluetoohActivity extends AppCompatActivity  {
             }
         }
     };
-
-
-
-
-
-
-
-
-//    private final BroadcastReceiver mReceiver = new BroadcastReceiver() {
-//
-//        public void onReceive(Context context, Intent intent) {
-//            // Filtramos por la accion. que  Nos interesa detectar
-//            String action = intent.getAction();
-//
-//            switch (action){
-//                case BluetoothAdapter.ACTION_DISCOVERY_STARTED:
-//                    showToats("Busqueda de dispositvos iniciada");
-//                    Log.d("DISCOVERY", "Busqueda de dispositvos iniciada");
-//                    break;
-//                case BluetoothAdapter.ACTION_DISCOVERY_FINISHED:
-//                    showToats("Busqueda de dispositivos finalizada");
-//                    ArrayAdapter arrayAdapter = new ArrayAdapter<BluetoothDevice>(context,android.R.layout.simple_list_item_1, devicesLista);
-//                    viewsDevices.setAdapter(arrayAdapter);
-//                    break;
-//                case BluetoothDevice.ACTION_FOUND:
-//                    // Extraemos el dispositivo del intent mediante la clave BluetoothDevice.EXTRA_DEVICE
-//                    BluetoothDevice device= intent.getParcelableExtra(BluetoothDevice.EXTRA_DEVICE);
-//                    devicesLista.add(device);
-//
-//
-//                    showToats("Dispositivo encontrado: " + device.getName() + "; MAC " + device.getAddress());
-//                    Log.d("ACTION", "Dispositivo encontrado: " + device.getName() + "; MAC " + device.getAddress());
-//
-//
-//
-//                    break;
-//
-//                case BluetoothAdapter.ACTION_STATE_CHANGED:
-//
-//                    if(mBluetoAdapter.isEnabled()) {
-//                        showToats("El bluetooh se ha activado ");
-//                    }
-//
-//                    if(!mBluetoAdapter.isEnabled()){
-//                        showToats("El bluetooh se ha desactivado");
-//
-//                    }
-//                    break;
-//
-//
-//
-//
-//            }
-//        }
-//    };
 
 
 

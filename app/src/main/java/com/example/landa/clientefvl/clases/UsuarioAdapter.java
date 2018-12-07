@@ -51,7 +51,6 @@ public class UsuarioAdapter extends BaseAdapter {
 
             nombre.setText("Nombre: "+ usuario.getNombre());
             apellido.setText("Apellido: "+ usuario.getApellido());
-            Identificador.setText("Identificador: " + usuario.getIdentificador());
 
 
         }

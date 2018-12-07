@@ -22,19 +22,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".interfaces.MainActivity">
+        <activity android:name=".interfaces.MainActivity"></activity>
+        <activity android:name=".interfaces.RegistroUsuarioActivity" />
+        <activity android:name=".interfaces.VerUsuariosActivity" />
+        <activity android:name=".interfaces.BluetoohActivity" />
+        <activity android:name=".interfaces.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".interfaces.RegistroUsuarioActivity" />
-        <activity android:name=".interfaces.VerUsuariosActivity" />
-        <activity android:name=".interfaces.BluetoohActivity" />
-        <activity
-            android:name=".interfaces.LoginActivity"
-            android:label="@string/title_activity_login"></activity>
+        <activity android:name=".interfaces.Registro" />
+        <activity android:name=".interfaces.RegistroCuentaActivity"></activity>
     </application>
 
 </manifest>
