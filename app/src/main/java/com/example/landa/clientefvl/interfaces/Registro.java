@@ -9,12 +9,15 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import com.example.landa.clientefvl.R;
 import com.example.landa.clientefvl.clases.Constante;
+import com.example.landa.clientefvl.clases.Encargado;
 import com.example.landa.clientefvl.clases.Manilla;
 import com.example.landa.clientefvl.clases.ManillaApp;
 import com.example.landa.clientefvl.clases.ManillaUsuario;
@@ -28,13 +31,14 @@ import java.io.IOException;
 import java.util.Date;
 
 
-public class Registro extends AppCompatActivity  implements View.OnClickListener {
+public class Registro extends AppCompatActivity  implements View.OnClickListener{
 
     private Spinner tipodocumentos,tipoUsuario;
     EditText textNombre, textApellido, textNumerodocumento, nombreDispositivo, macDispositivo;
     Button btnRegistrar;
     String documentoSelecionado;
     String TipoUsuarioSelecionado;
+    CheckBox boxAlarma;
 
 
     public final static String CONEXION= Constante.CONEXION;
@@ -51,6 +55,7 @@ public class Registro extends AppCompatActivity  implements View.OnClickListener
         nombreDispositivo.setEnabled(false);
         macDispositivo= findViewById(R.id.macDispositivo);
         macDispositivo.setEnabled(false);
+        boxAlarma=findViewById(R.id.alarma);
         btnRegistrar=findViewById(R.id.btnRegistrar);
 
 
@@ -71,6 +76,7 @@ public class Registro extends AppCompatActivity  implements View.OnClickListener
         tipoUsuario.setAdapter(myAdapter2);
 
         btnRegistrar.setOnClickListener(this);
+
 
 
 
@@ -106,7 +112,16 @@ public class Registro extends AppCompatActivity  implements View.OnClickListener
 
 
 
+  boxAlarma.setOnCheckedChangeListener(new CheckBox.OnCheckedChangeListener() {
+      @Override
+      public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
 
+          if(boxAlarma.isChecked()){
+
+              Constante.setAlarmaActivada(true);
+          }
+      }
+  });
 
 
 
@@ -129,33 +144,21 @@ public class Registro extends AppCompatActivity  implements View.OnClickListener
 
 
 
+
+
     @Override
     public void onClick(View v) {
 
 
-        if(v.equals(btnRegistrar)){
+
+
+        if(v.equals(btnRegistrar) && Constante.isAlarmaActivada()==true){
 
             new Thread(new Runnable() {
                 @RequiresApi(api = Build.VERSION_CODES.O)
                 @Override
                 public void run() {
                     try {
-                        //Bluestacks
-                    /*
-                    final String json = WEBUtilDomi.GETrequest("http://172.30.173.136:8080/usuario");
-
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(VerUsuariosActivity.this, ""+json, Toast.LENGTH_SHORT).show();
-                        }
-                    });
-
-                */
-
-                        /*  Post envió de datos*/
-
-                        /*Se cea el Usuario para mandarlo por el JSON*/
                         Gson gson = new Gson();
                         Usuario usuario = new Usuario();
                         usuario.setNombre(textNombre.getText().toString());
@@ -186,9 +189,17 @@ public class Registro extends AppCompatActivity  implements View.OnClickListener
                          Manilla manilla= existeManilla(macDispositivo.getText().toString());
 
                          añadirManillaUsuario(manilla.getMacId(), usu.getId());
-                         Constante.setIdDispositivo(manilla.getMacId());
+
+                        /*Almacena el id del dispositivo, para asociarla cuando se registre el usuario peditrico y la manilla*/
+                        Constante.setIdDispositivo(manilla.getMacId());
+
+                        /*Almacena el id del usuario Pediatrico para asociarlo cuando se cree el usuario pediatrico*/
+                        Constante.setIdUsuarioPediatrico(usu.getId());
 
                          añadirManillaApp(Constante.getIdApp(), Constante.getIdDispositivo());
+
+                         /*Realiza la asociacón del usuario encargado y el usuario pediatríco*/
+                         añadirEncargado(Constante.getIdUsuarioEncargado(), Constante.getIdUsuarioPediatrico());
 
 
 
@@ -205,12 +216,8 @@ public class Registro extends AppCompatActivity  implements View.OnClickListener
                     }
                 }
             }).start();
-
-
-
-
-
-
+        }else{
+            showToats("Active la alarma de notificación primero");
         }
 
     }
@@ -234,6 +241,24 @@ public class Registro extends AppCompatActivity  implements View.OnClickListener
         return tipo;
     }
 
+
+    public void añadirEncargado(String idEncargado, String idUsuario){
+
+        Gson gson= new Gson();
+        Encargado encargado= new Encargado();
+        encargado.setIdEncargado(idEncargado);
+        encargado.setIdUsuario(idUsuario);
+        String jsonNombre = gson.toJson(encargado);
+        try{
+            final String respuesta = WEBUtilDomi.JsonByPOSTrequest(CONEXION+"Encargados", jsonNombre);
+
+        }catch (IOException e){
+            Log.e(">>>>>",""+"error al añadir la manillaApp "+"idEncargado: "+ idEncargado +" idUsuario: "+ idUsuario);
+
+        }
+
+
+    }
 
  public void añadirManillaApp(String idApp, String idDispositivo){
         Gson json= new Gson();
@@ -328,17 +353,17 @@ public void añadirUsuarioDocumento(String idUsuario, String tipoDocumento){
 
 
     private void recibirInformacio(){
-        Bundle extras= getIntent().getExtras();
-        String nombreDis= extras.getString("nombreDispositivo");
-        String macDis= extras.getString("macDispositivo");
-        nombreDispositivo.setText(nombreDis);
-        macDispositivo.setText(macDis);
+//        Bundle extras= getIntent().getExtras();
+//        String nombreDis= extras.getString("nombreDispositivo");
+//        String macDis= extras.getString("macDispositivo");
+        nombreDispositivo.setText(Constante.getNomreBluetooth());
+        macDispositivo.setText(Constante.getMacBluetooth());
     }
 
 
     public void añadirmanilla(String nombreDispositivo, String macDispositivo, String idUsuario){
 
-        /*Quita los :  del mac id y los remplaza por -*/
+        /*Quita los dos puntos  del mac id y los remplaza por guiones*/
         String MCD= replaceCadena(macDispositivo);
 
         Manilla mani= existeManilla(MCD);

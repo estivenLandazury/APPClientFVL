@@ -13,7 +13,7 @@
         android:layout_width="200dp"
         android:layout_height="45dp"
         android:layout_gravity="center"
-        android:layout_marginTop="110dp"
+        android:layout_marginTop="85dp"
         android:id="@+id/nombreCuenta"
         android:hint="Nombre"
         android:inputType="text"
@@ -48,6 +48,17 @@
         android:id="@+id/CuentanumeroDoc"
         android:hint="número Documento"
         android:inputType="number"/>
+
+    <EditText
+        android:layout_width="200dp"
+        android:layout_height="45dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="8dp"
+        android:id="@+id/nombreDeCuenta"
+        android:hint="nombre Cuenta"
+        android:inputType="text"
+        />
+
 
     <EditText
         android:layout_width="200dp"

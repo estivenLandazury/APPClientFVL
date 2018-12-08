@@ -14,6 +14,7 @@
         android:layout_marginTop="90dp"
         android:src="@drawable/login"
 
+
         />
     <EditText
         android:id="@+id/nombreUsuario"

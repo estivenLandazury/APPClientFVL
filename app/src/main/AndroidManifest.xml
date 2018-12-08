@@ -14,6 +14,9 @@
     <uses-permission android:name="android.permission.ACCESS_COARSE." />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+
 
     <application
         android:allowBackup="true"

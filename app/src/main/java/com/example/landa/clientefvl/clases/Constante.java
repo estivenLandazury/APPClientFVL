@@ -12,6 +12,17 @@ public class Constante {
 
      static String idApp;
      static String idDispositivo;
+
+     static String macBluetooth;
+     static String nomreBluetooth;
+
+
+     static boolean AlarmaActivada=false;
+
+
+
+    static String idUsuarioPediatrico;
+     static String idUsuarioEncargado;
      public final static String ID_APP_MOVIL=idApp;
      public final static String ID_MAC_DISPODITIVO=idDispositivo;
 
@@ -20,8 +31,41 @@ public class Constante {
     public final static int TIPO_DOC_IDENTIDAD=2;
 
 
+    public static String getMacBluetooth() {
+        return macBluetooth;
+    }
 
-  public static String getIdApp() {
+    public static void setMacBluetooth(String macBluetooth) {
+        Constante.macBluetooth = macBluetooth;
+    }
+
+    public static String getNomreBluetooth() {
+        return nomreBluetooth;
+    }
+
+    public static void setNomreBluetooth(String nomreBluetooth) {
+        Constante.nomreBluetooth = nomreBluetooth;
+    }
+
+
+
+    public static String getIdUsuarioPediatrico() {
+        return idUsuarioPediatrico;
+    }
+
+    public static void setIdUsuarioPediatrico(String idUsuarioPediatrico) {
+        Constante.idUsuarioPediatrico = idUsuarioPediatrico;
+    }
+
+    public static String getIdUsuarioEncargado() {
+        return idUsuarioEncargado;
+    }
+
+    public static void setIdUsuarioEncargado(String idUsuarioEncargado) {
+        Constante.idUsuarioEncargado = idUsuarioEncargado;
+    }
+
+    public static String getIdApp() {
     return idApp;
   }
 
@@ -36,4 +80,13 @@ public class Constante {
   public static void setIdDispositivo(String idDispositivo) {
     Constante.idDispositivo = idDispositivo;
   }
+
+
+    public static boolean isAlarmaActivada() {
+        return AlarmaActivada;
+    }
+
+    public static void setAlarmaActivada(boolean alarmaActivada) {
+        AlarmaActivada = alarmaActivada;
+    }
 }

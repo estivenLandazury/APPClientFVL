@@ -34,13 +34,14 @@ public class RegistroCuentaActivity extends AppCompatActivity  implements View.O
     private Spinner tipodocumentos;
 
     String documentoSelecionado;
-    EditText textNombre, textApellido, textNumerodocumento, textContraseña, textRepetContraseña, textCorreo;
+    EditText textNombre, textApellido, textNumerodocumento, textContraseña, textRepetContraseña, textCorreo, textNombreCuenta;
     Button btnRegistrar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro_cuenta);
 
+        textNombreCuenta=findViewById(R.id.nombreDeCuenta);
         textNombre=findViewById(R.id.nombreCuenta);
         textApellido= findViewById(R.id.apellidoCuenta);
         textNumerodocumento=findViewById(R.id.CuentanumeroDoc);
@@ -86,12 +87,14 @@ public class RegistroCuentaActivity extends AppCompatActivity  implements View.O
                 public void run() {
                     try {
 
+
+
                         /*  Post envió de datos*/
 
                         /*Crea la cuenta del usuario, para poder loguearse posteriormente*/
-                        crearCuentaUsuario(textNombre.getText().toString(),textCorreo.getText().toString(),textContraseña.getText().toString(),textRepetContraseña.getText().toString());
+                        crearCuentaUsuario(textNombreCuenta.getText().toString(),textCorreo.getText().toString(),textContraseña.getText().toString(),textRepetContraseña.getText().toString());
                        /** se obtiene la cuenta creada anteriormenet*/
-                        User cuenta= obtenerCuenta(textNombre.getText().toString());
+                        User cuenta= obtenerCuenta(textNombreCuenta.getText().toString());
 
 
                         /*Se cea el Usuario para mandarlo por el JSON*/
@@ -108,12 +111,13 @@ public class RegistroCuentaActivity extends AppCompatActivity  implements View.O
 
 
                         /*Se crea el registro de la app que será  asociada al usuario*/
-                        crearAppMovil(textNombre.getText().toString());
+                        String nombreApp= textNombre.getText().toString()+textNumerodocumento.getText().toString();
+                        crearAppMovil(nombreApp);
 
 
 
-                        /*Se obtiene el objeto app, a partir del nombre de la app, que es el mismo de la cuenta de usuario*/
-                        AppMovil app= obtenerApp(textNombre.getText().toString());
+                        /*Se obtiene el objeto app, a partir del nombre de la app, que es el nombre de usuario y numero dde documento del usuario*/
+                        AppMovil app= obtenerApp(nombreApp);
 
                         /*Obtengo el JSON de  usuario a partir de su numero de documento*/
                         String Jsonusu = JsonUsuarioDocumento(usuario.getNumeroDocumento());
@@ -131,7 +135,11 @@ public class RegistroCuentaActivity extends AppCompatActivity  implements View.O
                          /* se asocia el usuario registrado y la app que enviará el estado de alarma a la web*/
                         crearUsuarioApp(usu.getId(),app.getId());
 
+                        /*Almacena el id de la app, para asociarla cuando se registre el usuario peditrico y la manilla*/
                        Constante.setIdApp(app.getId());
+
+                       /*Almacena el id del usuario encargado para asoicarlo cuando se cree el usuario pediatrico*/
+                       Constante.setIdUsuarioEncargado(usu.getId());
 
                         showToats("Se registro el usuario correctamente");
 
